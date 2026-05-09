@@ -1,0 +1,10 @@
+id,sku,name,unit,stock_quantity,reorder_threshold,eksik_miktar,doluluk_yuzde,price
+5f96489c-090d-4e00-a5e6-02bb781f5f32,KOP-001,Organik Domates,kg,30,50,20,60.0,24.9
+0f8b67ec-86f9-4ddc-bb86-9b3f85f0b8ff,KOP-008,Ispanak,kg,8,20,12,40.0,18.0
+b20009e5-21b6-4bc8-9e41-e0ebef1d47a7,KOP-009,Marul,adet,25,30,5,83.3,10.0
+8e04eac8-3f3c-44dc-a8dd-0ee276c74c9a,KOP-016,Brokoli,adet,15,20,5,75.0,28.0
+5a7381b4-38ea-48af-aa03-5fad94768ea8,KOP-023,Beyaz Peynir,kg,8,15,7,53.3,89.0
+d09ebeae-1a70-4ddb-94f1-cec72e9793a5,KOP-026,Tulum Peyniri,kg,5,8,3,62.5,145.0
+0dd94d65-ae70-49ee-bd7a-c965eb93d984,KOP-029,Çiçek Balı,kavanoz,12,20,8,60.0,180.0
+e2bc8bad-18c9-4565-b447-bd7af065112e,KOP-030,Çam Balı,kavanoz,8,10,2,80.0,250.0
+3e3cfb74-0d81-4d31-b9fc-9cb4693539cf,KOP-031,Sızma Zeytinyağı,litre,2,10,8,20.0,195.0

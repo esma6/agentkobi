@@ -1,0 +1,46 @@
+id,business_id,sku,name,description,price,stock_quantity,reorder_threshold,unit,created_at
+5f96489c-090d-4e00-a5e6-02bb781f5f32,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-001,Organik Domates,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",24.9,30,50,kg,2025-11-04T18:31:17.179378
+d9bf9fde-758f-4491-9392-71bba1caf9e9,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-002,Cherry Domates,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",39.9,55,30,kg,2025-05-27T18:31:17.179378
+e8618137-37ff-42be-8e63-f57dc7ef0eab,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-003,Salatalık,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",14.9,80,40,kg,2025-06-08T18:31:17.179378
+38148226-1a08-42c6-8495-325c5b85b0c9,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-004,Sivri Biber,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",18.5,60,30,kg,2025-10-27T18:31:17.179378
+c44bb138-be65-4898-975c-0ab7e52be965,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-005,Kapya Biber,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",22.0,45,25,kg,2025-05-15T18:31:17.179378
+549d4ab6-a18d-4e0e-99f1-5a9a57d5d12c,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-006,Patlıcan,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",16.9,70,35,kg,2025-08-03T18:31:17.179378
+cf79c2b8-c84e-4fff-99dc-0c8e619da39b,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-007,Kabak,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",12.5,90,40,kg,2025-05-16T18:31:17.179378
+0f8b67ec-86f9-4ddc-bb86-9b3f85f0b8ff,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-008,Ispanak,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",18.0,8,20,kg,2025-08-18T18:31:17.179378
+b20009e5-21b6-4bc8-9e41-e0ebef1d47a7,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-009,Marul,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",10.0,25,30,adet,2025-09-06T18:31:17.179378
+15cee272-4516-4204-b22d-6ea007091ceb,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-010,Beyaz Lahana,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",11.5,100,50,kg,2025-11-18T18:31:17.179378
+3d61347f-1c7b-4c93-8aa9-36be691c4400,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-011,Kırmızı Lahana,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",13.0,60,30,kg,2025-12-30T18:31:17.179378
+390ea186-44c1-417f-91a6-71eb5eae3403,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-012,Havuç,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",10.9,120,50,kg,2025-06-23T18:31:17.179378
+fca134c6-1a9b-43e5-924b-da5bcf2ab819,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-013,Patates,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",8.5,200,80,kg,2025-07-01T18:31:17.179378
+0db11c3c-fe06-47f6-aaa5-7a29216173ad,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-014,Soğan,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",7.9,150,60,kg,2026-01-23T18:31:17.179378
+1e1c2180-1409-46f4-910f-bebcce24d6f0,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-015,Sarımsak,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",35.0,40,20,kg,2026-02-14T18:31:17.179378
+8e04eac8-3f3c-44dc-a8dd-0ee276c74c9a,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-016,Brokoli,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",28.0,15,20,adet,2026-01-13T18:31:17.179378
+e3adfeac-5405-477f-9d13-8e1ebc713fbe,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-017,Karnabahar,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",25.0,18,15,adet,2025-12-22T18:31:17.179378
+a39e4cbe-8548-4dcb-8835-33a70b0c9a31,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-018,Mandalina,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",22.0,90,50,kg,2025-04-23T18:31:17.179378
+e9ebdfd6-54df-40da-b507-26fd47aa25da,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-019,Portakal,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",18.0,120,60,kg,2025-12-19T18:31:17.179378
+aee29c24-3fdd-4681-b913-43595f8221a8,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-020,Elma (Amasya),"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",24.0,100,50,kg,2025-08-06T18:31:17.179378
+94977138-1ccd-4a7c-a950-db83489555f1,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-021,Armut,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",26.0,60,30,kg,2025-05-09T18:31:17.179378
+bc4bf202-39e9-43e9-a165-0be408e84935,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-022,Üzüm (Çekirdeksiz),"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",34.0,45,25,kg,2026-02-06T18:31:17.179378
+5a7381b4-38ea-48af-aa03-5fad94768ea8,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-023,Beyaz Peynir,"Kooperatif çiftliklerinden, geleneksel yöntemlerle üretilmiştir.",89.0,8,15,kg,2025-08-25T18:31:17.179378
+ea317f3d-7d0c-48ed-a0a5-ca51d364eeee,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-024,Kaşar Peyniri,"Kooperatif çiftliklerinden, geleneksel yöntemlerle üretilmiştir.",120.0,12,10,kg,2025-08-27T18:31:17.179378
+d13f07e8-0564-4384-99fd-6c3abb5634d5,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-025,Lor Peyniri,"Günlük hasat, taze ve doğal. Hiçbir katkı maddesi içermez.",55.0,20,10,kg,2025-05-09T18:31:17.179378
+d09ebeae-1a70-4ddb-94f1-cec72e9793a5,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-026,Tulum Peyniri,"Kooperatif çiftliklerinden, geleneksel yöntemlerle üretilmiştir.",145.0,5,8,kg,2025-07-14T18:31:17.179378
+a3040ad5-a221-4890-9792-0829a4706ebc,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-027,Yoğurt,"Kooperatif çiftliklerinden, geleneksel yöntemlerle üretilmiştir.",28.0,30,20,kg,2025-06-13T18:31:17.179378
+b38e4a4d-7d75-40c6-b940-3e9f7538277e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-028,Tereyağı,"Kooperatif çiftliklerinden, geleneksel yöntemlerle üretilmiştir.",110.0,15,10,kg,2025-11-02T18:31:17.179378
+0dd94d65-ae70-49ee-bd7a-c965eb93d984,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-029,Çiçek Balı,"Doğal yollarla üretilmiş, katkısız ve sağlıklı.",180.0,12,20,kavanoz,2025-05-31T18:31:17.179378
+e2bc8bad-18c9-4565-b447-bd7af065112e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-030,Çam Balı,"Doğal yollarla üretilmiş, katkısız ve sağlıklı.",250.0,8,10,kavanoz,2026-03-05T18:31:17.179378
+3e3cfb74-0d81-4d31-b9fc-9cb4693539cf,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-031,Sızma Zeytinyağı,Soğuk sıkım yöntemi ile elde edilmiştir. Birinci kalite.,195.0,2,10,litre,2026-01-11T18:31:17.179378
+eafc8fb9-5824-49f9-96b0-5ede11a4a77f,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-032,Riviera Zeytinyağı,"Doğal yollarla üretilmiş, katkısız ve sağlıklı.",145.0,18,15,litre,2025-06-09T18:31:17.179378
+31a2d547-ca21-4312-9c74-a6b8c3c396d0,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-033,Organik Un,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",28.0,80,40,kg,2025-10-25T18:31:17.179378
+da95feb3-f818-4f90-828a-433bf1e09f55,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-034,Bulgur,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",22.0,60,30,kg,2025-04-16T18:31:17.179378
+48eeb766-01f1-4715-89d0-a914a93beced,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-035,Kırmızı Mercimek,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",30.0,50,25,kg,2025-09-17T18:31:17.179378
+52c484e8-1661-4444-a4b0-8f57307d4b6e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-036,Yeşil Mercimek,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",34.0,40,20,kg,2026-01-12T18:31:17.179378
+a343e789-8d36-47d9-a9af-32d6a8ce609e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-037,Nohut,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",28.0,55,25,kg,2025-10-11T18:31:17.179378
+e039b51d-3827-4461-95d3-f3acf197b35e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-038,Kuru Fasulye,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",36.0,45,20,kg,2025-07-31T18:31:17.179378
+70a395a1-80f2-4b38-ac66-35b13cc3d0bd,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-039,Fındık,"Karadeniz bölgesinden seçme, yüksek yağ oranlı.",145.0,25,15,kg,2025-12-20T18:31:17.179378
+677b3da4-40d4-46b6-8f07-4158f916cada,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-040,Ceviz,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",160.0,18,12,kg,2025-07-21T18:31:17.179378
+ce6c392a-5211-4399-a4d4-6bf694c5b6ae,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-041,Badem,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",190.0,10,8,kg,2026-03-09T18:31:17.179378
+6501eb9c-0ae7-4208-afc8-14226a621463,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-042,Kuru Üzüm,"Doğal yollarla üretilmiş, katkısız ve sağlıklı.",65.0,30,15,kg,2025-10-27T18:31:17.179378
+b3e586be-03f1-4584-be5f-7fdca4e4cf4d,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-043,Kuru Kayısı,"Doğal yollarla üretilmiş, katkısız ve sağlıklı.",95.0,20,10,kg,2025-06-27T18:31:17.179378
+0bc2cdc1-89ab-425f-bc55-dbe4253a2d05,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-044,Elma Sirkesi,"Sertifikalı organik üretim, doğal gübre ile yetiştirilmiştir.",45.0,35,15,şişe,2025-12-09T18:31:17.179378
+3fc2614a-32a0-472b-b50e-e880ff24505b,a1b2c3d4-e5f6-7890-abcd-ef1234567890,KOP-045,Domates Salçası,"Kooperatif üyelerinin bahçelerinden, ev yapımı yöntemle.",38.0,50,20,kg,2025-06-24T18:31:17.179378

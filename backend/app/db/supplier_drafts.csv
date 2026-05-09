@@ -1,0 +1,49 @@
+id,business_id,product_id,supplier_email,supplier_name,subject,body,suggested_quantity,estimated_cost,status,created_at,approved_at,sent_at
+27957a24-5622-41f8-af9a-835d083f1490,a1b2c3d4-e5f6-7890-abcd-ef1234567890,5f96489c-090d-4e00-a5e6-02bb781f5f32,tedarik@egetarim.com.tr,Ege Tarım Kooperatifi,Stok Yenileme Talebi: Organik Domates (150 kg),"Sayın Ege Tarım Kooperatifi,
+
+Organik Domates stoğumuz kritik seviyeye (30 kg) düştü. 150 kg sipariş vermek istiyoruz.
+
+En kısa sürede bilgi almanızı rica ederiz.
+
+Saygılarımızla,
+Ayşe'nin Tarım Kooperatifi",150,2427.0,pending,2026-05-08T08:31:17.179378,,
+cb99915d-1d48-4d44-b15b-2c91b0edc749,a1b2c3d4-e5f6-7890-abcd-ef1234567890,0f8b67ec-86f9-4ddc-bb86-9b3f85f0b8ff,tedarik@egetarim.com.tr,Ege Tarım Kooperatifi,Stok Yenileme Talebi: Ispanak (60 kg),"Sayın Ege Tarım Kooperatifi,
+
+Ispanak stoğumuz kritik seviyeye (8 kg) düştü. 60 kg sipariş vermek istiyoruz.
+
+En kısa sürede bilgi almanızı rica ederiz.
+
+Saygılarımızla,
+Ayşe'nin Tarım Kooperatifi",60,702.0,pending,2026-05-09T08:31:17.179378,,
+71053685-723e-4d81-84e7-ce67425c542e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,b20009e5-21b6-4bc8-9e41-e0ebef1d47a7,siparis@antalyasera.com,Antalya Sera A.Ş.,Stok Yenileme Talebi: Marul (90 adet),"Sayın Antalya Sera A.Ş.,
+
+Marul stoğumuz kritik seviyeye (25 adet) düştü. 90 adet sipariş vermek istiyoruz.
+
+En kısa sürede bilgi almanızı rica ederiz.
+
+Saygılarımızla,
+Ayşe'nin Tarım Kooperatifi",90,585.0,pending,2026-05-08T07:31:17.179378,,
+d9ef6a72-862e-4a7f-870a-cb3cca145815,a1b2c3d4-e5f6-7890-abcd-ef1234567890,8e04eac8-3f3c-44dc-a8dd-0ee276c74c9a,siparis@antalyasera.com,Antalya Sera A.Ş.,Stok Yenileme Talebi: Brokoli (60 adet),"Sayın Antalya Sera A.Ş.,
+
+Brokoli stoğumuz kritik seviyeye (15 adet) düştü. 60 adet sipariş vermek istiyoruz.
+
+En kısa sürede bilgi almanızı rica ederiz.
+
+Saygılarımızla,
+Ayşe'nin Tarım Kooperatifi",60,1092.0,pending,2026-05-09T03:31:17.179378,,
+b603c0fe-069f-4c01-ba56-cd42c5c72b20,a1b2c3d4-e5f6-7890-abcd-ef1234567890,5a7381b4-38ea-48af-aa03-5fad94768ea8,tedarik@egetarim.com.tr,Ege Tarım Kooperatifi,Stok Yenileme Talebi: Beyaz Peynir (45 kg),"Sayın Ege Tarım Kooperatifi,
+
+Beyaz Peynir stoğumuz kritik seviyeye (8 kg) düştü. 45 kg sipariş vermek istiyoruz.
+
+En kısa sürede bilgi almanızı rica ederiz.
+
+Saygılarımızla,
+Ayşe'nin Tarım Kooperatifi",45,2603.25,pending,2026-05-08T16:31:17.179378,,
+fbdafbe4-fc30-4921-8166-8e2e349e6288,a1b2c3d4-e5f6-7890-abcd-ef1234567890,d09ebeae-1a70-4ddb-94f1-cec72e9793a5,tedarik@egetarim.com.tr,Ege Tarım Kooperatifi,Stok Yenileme Talebi: Tulum Peyniri (24 kg),"Sayın Ege Tarım Kooperatifi,
+
+Tulum Peyniri stoğumuz kritik seviyeye (5 kg) düştü. 24 kg sipariş vermek istiyoruz.
+
+En kısa sürede bilgi almanızı rica ederiz.
+
+Saygılarımızla,
+Ayşe'nin Tarım Kooperatifi",24,2262.0,pending,2026-05-08T18:31:17.179378,,
