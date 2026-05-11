@@ -1,7 +1,7 @@
-﻿[project]
+[project]
 name = "agentkobi-backend"
 version = "0.1.0"
-description = "AgentKobi backend — autonomous agentic assistant for SMBs"
+description = "AgentKobi backend"
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115",
