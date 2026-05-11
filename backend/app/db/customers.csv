@@ -1,0 +1,31 @@
+id,business_id,name,phone,email,address,total_orders,created_at
+1fc96c83-31ce-4951-a05e-9aa23eff9f53,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Ziyaettin Aslan,+905171419610,muhammetyaman@example.net,"819 Türk Burgs, ville, Eskişehir",5,2025-11-20T18:31:17.179378
+f3831986-b11d-4afb-ba6b-e4f3dd08d1dd,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Elhan Zorlu,+905243341057,durmuskorkmazalp@example.net,"79402 Şama Harbors Apt. 351, land, Bursa",2,2026-02-16T18:31:17.179378
+c1fafb68-d421-4a00-8cec-fe2f0e7ca34e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Canseven Ergül Akdeniz,+905572458591,necva40@example.net,"161 Karadeniz Road Suite 931, land, Eskişehir",4,2025-06-11T18:31:17.179378
+440e9c7d-b108-4ce3-93ca-3ed364f32e7d,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Prof. Ferzi Asım Akdeniz,+905121499914,denkelkisakurek@example.com,"525 Bilir Skyway Suite 192, ton, Adana",6,2026-02-21T18:31:17.179378
+4bed911a-25b8-4fdd-9dc3-f2a0b92c6a8a,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Uz. Müslum Kasim Aslan,+905249478454,ugurhayrioglu@example.org,"56413 Bilir Shoal, side, Bursa",2,2025-06-05T18:31:17.179378
+fb7b547a-8777-45c9-a5fa-1acac06b49fa,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Sevican Manço Eraslan,+905454335942,oksevenkoruturk@example.net,"969 Arsoy Forges Apt. 871, fort, İstanbul",2,2025-05-12T18:31:17.179378
+9782e134-e38e-417c-9b0d-51bf86b864c2,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Birgit Tekbay Aksu Çetin,+905448038374,etevetoglu@example.com,"784 Tuğçe Stravenue Apt. 845, ton, Trabzon",2,2025-12-18T18:31:17.179378
+e34be209-cc2e-4d3a-8a40-8d0b28e7474d,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Sebigül Ferhan Ertaş,+905475667265,gulildes@example.com,"148 Göksev Landing, ville, Kayseri",3,2026-04-06T18:31:17.179378
+2ea45908-379d-424d-b924-03a7b7d2b4ad,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Sümeyye Hayrioğlu,+905208090293,hyildirim@example.com,"03911 Alemdar Cliff Apt. 278, burgh, Samsun",4,2025-10-17T18:31:17.179378
+52fbe9b7-8348-42ce-b6a3-0e9ad0300dc4,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Yeşil Bilge,+905194612365,ibilir@example.net,"465 Akçay Path, burgh, Antalya",2,2025-10-19T18:31:17.179378
+e60f9cfc-ddeb-4387-9f3e-8b4539a5ad4b,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Erdogan Ebuakil Erdoğan Şama,+905157374122,zenginhuda@example.org,"10310 Erdoğan Passage, mouth, Ankara",1,2026-02-19T18:31:17.179378
+b223ff17-53de-4c9a-8f81-be0d8d6c12d3,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Sırriye Bilir,+905325437923,irfanihsanoglu@example.net,"76311 Ergül Manors Suite 701, bury, Konya",1,2026-03-18T18:31:17.179378
+6e721f7f-727d-41db-a40c-25b8d89434d4,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Nalân Sezgin Bilge,+905399996414,yukselkayrabay@example.org,"62473 Asliye Valley Apt. 080, ton, Trabzon",5,2026-02-05T18:31:17.179378
+35c3decd-c601-4bc3-b010-fd0c0da231fe,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Uz. Köker Nurullah Güçlü,+905342322047,ogetakcay@example.org,"0647 Şafak Square, land, Balıkesir",7,2025-07-01T18:31:17.179378
+3d4b1757-42d2-4a02-8cda-0bd0725d468f,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Uz. Gülev Arslan Bilir,+905507067228,zenginsirivan@example.net,"500 Zorlu Walk, side, Antalya",4,2025-06-18T18:31:17.179378
+66d630f8-37b6-4671-932f-8a1cd42cb3f9,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Bay Oruç Çorlu,+905552166941,berentevetoglu@example.org,"1939 Nursim Common, haven, Bursa",3,2026-03-17T18:31:17.179378
+2b464ff0-2374-4ec2-bac8-9054e273d371,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Kader Bilir,+905245855124,nevsal46@example.org,"5107 Bilender Plain Apt. 842, chester, Eskişehir",3,2026-02-28T18:31:17.179378
+de0d7020-5835-41dd-ae2a-392ea6e78954,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Ercihan Arsoy,+905242694522,gulel78@example.net,"808 İhsanoğlu Shore Apt. 241, stad, Diyarbakır",4,2025-09-27T18:31:17.179378
+3b30af72-eeee-43c5-8191-88e74f80b647,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Esenbay Arslan,+905397120868,ucgulsama@example.org,"740 Risalet Manors Suite 005, ville, Antalya",2,2026-01-16T18:31:17.179378
+3c3bc623-f041-4554-ac4f-fb738052a720,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Feyha Korutürk,+905324514944,tdurmus@example.com,"12805 Adila Crossroad, berg, Konya",6,2025-11-24T18:31:17.179378
+22a167c2-bcf1-494b-a0eb-733aef131552,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Nezize Aygönenç Akçay,+905532197935,mahir31@example.com,"232 İlmafer Burg Apt. 563, ton, Trabzon",8,2025-06-02T18:31:17.179378
+e5ec94b2-bb5e-4e80-8a82-55cf15b9e359,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Prof. Vâlâ Sakarya,+905209961380,cbilge@example.com,"75433 Seyyide Fields, view, Eskişehir",5,2025-12-05T18:31:17.179378
+8f9a09a8-423c-4e42-8cf9-6ff584963ae2,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Laze Bilge,+905397366205,ocalansagit@example.com,"850 Rasul Fall Suite 019, furt, İzmir",6,2025-11-22T18:31:17.179378
+ce94eb33-7612-42d1-bc9c-52d7aed408d8,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Minibe Seblâ Tevetoğlu Zorlu,+905504684531,kisakurekmehrigul@example.org,"60883 Şafak Cliff Suite 951, chester, Balıkesir",8,2025-10-25T18:31:17.179378
+b5eb44da-1f2b-4a3c-add8-dbe261f41d2f,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Rehime Müferrih Gülen,+905591938483,humeyra23@example.com,"299 Gülen Plaza Apt. 443, port, Diyarbakır",0,2025-12-13T18:31:17.179378
+28fda273-61d7-4a4e-bf5e-a44fe39dc347,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Seçgül Dumanlı,+905126292423,ntarhan@example.net,"214 Çorlu Viaduct Apt. 433, chester, Diyarbakır",2,2025-09-16T18:31:17.179378
+c8e5283e-d3d2-4026-89c5-312563f0d907,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Alattin Yüksel,+905144539704,xmansiz@example.org,"9367 Yüksel Drive Apt. 163, berg, Antalya",6,2025-06-23T18:31:17.179378
+91ec9855-f293-4ad0-bebe-17a7c7eed7be,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Bayan Çolpan Hurican Çamurcuoğlu Akdeniz,+905556279418,ertasertuncay@example.com,"9868 Akçay Estate Suite 743, burgh, Balıkesir",3,2025-12-22T18:31:17.179378
+bae7b579-0e5c-4378-abfa-6d934869460e,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Dr. Hayel Aslan Dumanlı,+905417637601,demirelserhatmehmet@example.org,"5812 Müslum Lights Apt. 316, view, Eskişehir",3,2025-05-15T18:31:17.179378
+89243b01-60a2-4efe-9fd9-4b0c92edf5d0,a1b2c3d4-e5f6-7890-abcd-ef1234567890,Zeyno Ertaş,+905195443951,nyorulmaz@example.com,"096 Yılmaz Knoll Suite 668, chester, Kayseri",3,2026-01-28T18:31:17.179378
