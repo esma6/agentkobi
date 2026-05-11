@@ -181,6 +181,12 @@ async def run(business_id: str) -> dict: ...
 # app/agents/stock_agent.py:
 async def run(business_id: str) -> list[dict]: ...
 
+# app/agents/shipping_agent.py:
+async def run(business_id: str) -> dict: ...
+
+# app/agents/supplier_agent.py:
+async def run(business_id: str) -> list[dict]: ...
+
 # app/agents/briefing_agent.py:
 async def run(
     order_data: dict,
@@ -193,3 +199,28 @@ async def run(
 Bu interface'''ler hazır olmadığı sürece `nodes.py` stub döndürüyor;
 graph yine de uçtan uca çalışıyor. Yani Utku'''nun çalışması beni,
 benim çalışmam Utku'''yu **bloklamıyor**.
+
+Ilk 4 ajan icin implementasyon eklendi:
+- `app/agents/order_agent.py`
+- `app/agents/stock_agent.py`
+- `app/agents/shipping_agent.py`
+- `app/agents/supplier_agent.py`
+- `app/agents/briefing_agent.py` Gemini ile AI brifing üretir; hata olursa
+  `nodes.py` template fallback'e düşer.
+
+Tek tek denemek icin:
+
+```bash
+cd backend
+python -c "import asyncio; from app.agents.order_agent import run; print(asyncio.run(run('a1b2c3d4-e5f6-7890-abcd-ef1234567890')))"
+python -c "import asyncio; from app.agents.stock_agent import run; data=asyncio.run(run('a1b2c3d4-e5f6-7890-abcd-ef1234567890')); print(len(data)); print(data[:1])"
+python -c "import asyncio; from app.agents.shipping_agent import run; print(asyncio.run(run('a1b2c3d4-e5f6-7890-abcd-ef1234567890')))"
+python -c "import asyncio; from app.agents.supplier_agent import run; data=asyncio.run(run('a1b2c3d4-e5f6-7890-abcd-ef1234567890')); print(len(data)); print(data[:1])"
+```
+
+Graph icinde denemek icin:
+
+```bash
+cd backend
+python -c "import asyncio; from app.graph.orchestrator import run_workflow; result=asyncio.run(run_workflow('a1b2c3d4-e5f6-7890-abcd-ef1234567890')); print(result['order_data']); print(len(result['stock_data'])); print(result['shipping_data']); print(len(result['supplier_drafts'])); print(result['briefing_final'])"
+```
