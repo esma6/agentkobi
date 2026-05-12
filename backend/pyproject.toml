@@ -24,6 +24,7 @@ dependencies = [
   "python-dotenv>=1.0",
   "tenacity>=9.0",
   "pandas>=2.2",
+  "psycopg2-binary>=2.9",
 ]
 
 [project.optional-dependencies]
