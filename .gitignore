@@ -33,3 +33,4 @@ redis_data/
 # Logs
 logs/
 *.log
+docker-compose.yml
