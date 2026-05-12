@@ -1,3 +1,4 @@
+
 import pandas as pd
 from pathlib import Path
 
@@ -10,4 +11,5 @@ products_df = pd.read_csv(DATA_DIR / "products.csv")
 critical_df = pd.read_csv(DATA_DIR / "critical_stock.csv")
 drafts_df = pd.read_csv(DATA_DIR / "supplier_drafts_full.csv")
 drafts_by_business_df = pd.read_csv(DATA_DIR / "supplier_drafts.csv")
-customers_df = pd.read_csv(DATA_DIR / "customers.csv")
+customers_df = pd.read_csv(DATA_DIR / "customers.csv")
+
