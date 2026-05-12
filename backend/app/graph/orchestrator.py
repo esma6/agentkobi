@@ -1,4 +1,4 @@
-﻿"""
+"""
 LangGraph orkestratörü.
 
 Akış:
@@ -28,7 +28,15 @@ Akış:
 from __future__ import annotations
 
 import logging
+import os
+from pathlib import Path
 from typing import Any
+from dotenv import load_dotenv
+
+ROOT_DIR = Path(__file__).resolve().parents[3]
+load_dotenv(ROOT_DIR / ".env")
+load_dotenv(ROOT_DIR / "backend" / ".env")
+
 
 from langgraph.graph import END, StateGraph
 
@@ -67,17 +75,13 @@ def build_graph():
 
     # Aslında LangGraph'te paralel için 4 ayrı entry yerine
     # "fan-out from a virtual start" kullanılır:
-    g.add_edge("order", "aggregator")
-    g.add_edge("stock", "aggregator")
-    g.add_edge("shipping", "aggregator")
-    g.add_edge("supplier", "aggregator")
-
-    # 4 ajanı START'tan paralel başlatmak için:
     from langgraph.graph import START
     g.add_edge(START, "order")
-    g.add_edge(START, "stock")
-    g.add_edge(START, "shipping")
-    g.add_edge(START, "supplier")
+    g.add_edge("order", "stock")
+    g.add_edge("stock", "shipping")
+    g.add_edge("shipping", "supplier")
+    g.add_edge("supplier", "aggregator")
+
 
     # Aggregator sonrası dallanma
     g.add_conditional_edges(

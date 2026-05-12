@@ -1,30 +1,66 @@
 from __future__ import annotations
 
+import os
 from typing import Any
+from pydantic import BaseModel, Field
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.messages import ToolMessage
+from app.models.tools import get_pending_drafts
 
-from app.db.loader import drafts_by_business_df
+class SupplierDraft(BaseModel):
+    id: str
+    product_id: str = ""
+    supplier_name: str = ""
+    subject: str = ""
+    suggested_quantity: float = 0.0
+    estimated_cost: float = 0.0
+    status: str = ""
 
+class SupplierDrafts(BaseModel):
+    drafts: list[SupplierDraft]
 
 async def run(business_id: str) -> list[dict[str, Any]]:
-    """Return supplier drafts waiting for approval."""
-    drafts = drafts_by_business_df[drafts_by_business_df["business_id"] == business_id].copy()
+    """Tedarikçi taslaklarını özetleyen LLM ajanı."""
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        raise RuntimeError("GOOGLE_API_KEY tanımlı değil")
 
-    pending = drafts[drafts["status"].fillna("").str.lower() == "pending"]
-    pending = pending.sort_values("created_at", ascending=False)
+    model = os.getenv("GOOGLE_MODEL", "gemini-2.5-flash")
+    llm = ChatGoogleGenerativeAI(
+        model=model,
+        google_api_key=api_key,
+        temperature=0.1,
+    )
+    
+    tools = [get_pending_drafts]
+    llm_with_tools = llm.bind_tools(tools)
+    llm_structured = llm.with_structured_output(SupplierDrafts)
+    
+    prompt = f"""
+    Sen AgentKobi'nin tedarik takip ajanısın.
+    Görevin, onay bekleyen tedarikçi sipariş taslaklarını bulmaktır.
+    
+    Sana verilen araçları (tools) kullanarak onay bekleyen (status: pending) taslakları bul.
+    
+    Mutlaka araçları kullanarak verileri çek.
+    """
+    
+    messages: list[Any] = [("human", prompt)]
+    response = await llm_with_tools.ainvoke(messages)
+    
+    if response.tool_calls:
+        for tool_call in response.tool_calls:
+            tool_name = tool_call["name"]
+            tool_args = tool_call["args"]
+            
+            if tool_name == "get_pending_drafts":
+                result = get_pending_drafts.invoke(tool_args)
+                messages.append(response)
+                messages.append(ToolMessage(content=str(result), tool_call_id=tool_call["id"]))
+                
+                final_response = await llm_structured.ainvoke(messages)
+                return final_response.model_dump()["drafts"]
+                
+    return []
 
-    fields = [
-        "id",
-        "product_id",
-        "product_name",
-        "unit",
-        "supplier_email",
-        "supplier_name",
-        "subject",
-        "body",
-        "suggested_quantity",
-        "estimated_cost",
-        "status",
-        "created_at",
-    ]
-    existing_fields = [field for field in fields if field in pending.columns]
-    return pending[existing_fields].to_dict(orient="records")
+

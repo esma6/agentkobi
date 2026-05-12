@@ -5,22 +5,14 @@ from typing import Any
 from pydantic import BaseModel, Field
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import ToolMessage
-from app.models.tools import get_critical_stock
+from app.models.tools import get_orders_by_status
 
-class StockAlert(BaseModel):
-    product_id: str
-    sku: str
-    product_name: str
-    current_quantity: float
-    reorder_threshold: float
-    missing_quantity: float
-    unit: str
+class CustomerSummary(BaseModel):
+    active_customers_yesterday: int = Field(description="Dün sipariş veren aktif müşteri sayısı")
+    top_customer_name: str = Field(description="En çok sipariş veren müşterinin adı")
 
-class StockAlerts(BaseModel):
-    alerts: list[StockAlert]
-
-async def run(business_id: str) -> list[dict[str, Any]]:
-    """Stok durumunu özetleyen LLM ajanı."""
+async def run(business_id: str) -> dict[str, Any]:
+    """Müşteri durumunu özetleyen LLM ajanı."""
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         raise RuntimeError("GOOGLE_API_KEY tanımlı değil")
@@ -32,24 +24,17 @@ async def run(business_id: str) -> list[dict[str, Any]]:
         temperature=0.1,
     )
     
-    tools = [get_critical_stock]
+    tools = [get_orders_by_status]
     llm_with_tools = llm.bind_tools(tools)
-    llm_structured = llm.with_structured_output(StockAlerts)
+    llm_structured = llm.with_structured_output(CustomerSummary)
     
     prompt = f"""
-    Sen AgentKobi'nin stok takip ajanısın.
-    Görevin, kritik stok seviyesinin altına düşen ürünleri tespit etmektir.
+    Sen AgentKobi'nin müşteri ilişkileri ajanısın.
+    Görevin, sipariş verilerini inceleyerek müşteri hareketliliğini özetlemektir.
     
-    Sana verilen araçları (tools) kullanarak kritik stoktaki ürünleri bul.
-    Her ürün için:
-    - product_id (id alanından)
-    - sku
-    - product_name (name alanından)
-    - current_quantity (stock_quantity alanından)
-    - reorder_threshold
-    - missing_quantity (eksik_miktar alanından)
-    - unit
-    bilgilerini içeren bir liste oluştur.
+    Sana verilen araçları (tools) kullanarak:
+    1. Son siparişlerde en çok görünen müşteriyi (veya dün sipariş verenleri) bulmaya çalış.
+    2. Aktif müşteri sayısını tahmin et.
     
     Mutlaka araçları kullanarak verileri çek.
     """
@@ -62,14 +47,13 @@ async def run(business_id: str) -> list[dict[str, Any]]:
             tool_name = tool_call["name"]
             tool_args = tool_call["args"]
             
-            if tool_name == "get_critical_stock":
-                result = get_critical_stock.invoke(tool_args)
+            if tool_name == "get_orders_by_status":
+                result = get_orders_by_status.invoke(tool_args)
                 messages.append(response)
                 messages.append(ToolMessage(content=str(result), tool_call_id=tool_call["id"]))
                 
                 final_response = await llm_structured.ainvoke(messages)
-                return final_response.model_dump()["alerts"]
+                return final_response.model_dump()
                 
-    return []
-
+    return {"active_customers_yesterday": 0, "top_customer_name": "Bilinmiyor"}
 

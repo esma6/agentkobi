@@ -7,6 +7,11 @@ from typing import Any
 
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
+from pydantic import BaseModel, Field
+
+class BriefingOutput(BaseModel):
+    briefing: str = Field(description="KOBİ sahibine yazılmış aksiyon odaklı Türkçe brifing metni.")
+
 
 
 ROOT_DIR = Path(__file__).resolve().parents[3]
@@ -64,9 +69,9 @@ async def run(
         google_api_key=api_key,
         temperature=0.2,
     )
+    llm_structured = llm.with_structured_output(BriefingOutput)
+    
     payload = _compact_payload(order_data, stock_data, supplier_drafts, rag_context)
-    response = await llm.ainvoke(_build_prompt(payload))
-    content = getattr(response, "content", response)
-    if isinstance(content, list):
-        content = " ".join(str(part) for part in content)
-    return str(content).strip()
+    response = await llm_structured.ainvoke(_build_prompt(payload))
+    
+    return str(response.briefing).strip()
