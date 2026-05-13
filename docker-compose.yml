@@ -1,0 +1,99 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: agentkobi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-agentkobi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: ${POSTGRES_DB:-agentkobi}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agentkobi} -d ${POSTGRES_DB:-agentkobi}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - agentkobi-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: agentkobi-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - agentkobi-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agentkobi-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      # .env'den okunan değişkenler — docker-compose otomatik okur
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://agentkobi:changeme@postgres:5432/agentkobi}
+      DATABASE_URL_SYNC: postgresql+psycopg2://${POSTGRES_USER:-agentkobi}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-agentkobi}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      TZ: ${TZ:-Europe/Istanbul}
+      # İlk açılışta seed çalışsın mı? "1" -> evet (default), "0" -> hayır
+      AUTO_SEED: ${AUTO_SEED:-1}
+    ports:
+      - "8000:8000"
+    # entrypoint.sh: alembic upgrade head -> (gerekiyorsa) seed -> uvicorn
+    command: ["/app/entrypoint.sh"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - agentkobi-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: agentkobi-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_started
+    environment:
+      # Tarayıcıdan istek atılacağı için "localhost" doğru (host port mapping)
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      # Next.js server component'leri container içinden çağırır → docker network içi servis adı
+      SERVER_API_URL: ${SERVER_API_URL:-http://backend:8000}
+    ports:
+      - "3000:3000"
+    networks:
+      - agentkobi-net
+
+volumes:
+  postgres_data:
+
+networks:
+  agentkobi-net:
+    driver: bridge

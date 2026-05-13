@@ -33,4 +33,8 @@ redis_data/
 # Logs
 logs/
 *.log
-docker-compose.yml
+
+# docker-compose.yml repoda kalmalı — demo için zorunlu.
+# (Eski .gitignore bunu hatalı olarak hariç tutuyordu.)
+# docker-compose.override.yml kişisel ayarlar için kullanılabilir, o ignore edilebilir:
+docker-compose.override.yml

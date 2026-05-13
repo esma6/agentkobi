@@ -1,6 +1,13 @@
+// Next.js'de bu modül hem server (Node.js, container içi) hem client (tarayıcı)
+// tarafında import edilir. İki tarafın farklı URL kullanması gerek:
+//   - Server tarafı (container içi):  http://backend:8000  (docker network içi servis adı)
+//   - Client tarafı  (tarayıcı):      http://localhost:8000 (host'taki port mapping)
+//
+// `typeof window === "undefined"` kontrolü server/client ayrımı için kullanılır.
+// SERVER_API_URL compose'ta tanımlanır (NEXT_PUBLIC_ değil — sadece server'da görünür).
 const BASE =
   typeof window === "undefined"
-    ? process.env.SERVER_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://backend:8000"
+    ? process.env.SERVER_API_URL ?? "http://backend:8000"
     : process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 async function get<T>(path: string): Promise<T> {
@@ -125,19 +132,4 @@ export const api = {
         trigger_source: "manual",
       }
     ),
-
-  sendBriefing: () =>
-    post<{
-      ok: boolean;
-      briefing: string;
-      used_fallback: boolean;
-      errors: string[];
-      channels: { telegram: boolean; email: boolean };
-    }>("/api/briefing/run", {
-      business_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      business_name: "Demo İşletme",
-      owner_name: "Demo Sahibi",
-      trigger_source: "manual_sidebar",
-      send_channels: true,
-    }),
 };

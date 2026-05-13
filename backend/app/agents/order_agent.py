@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import os
 from typing import Any
 from pydantic import BaseModel, Field
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import ToolMessage
+from app.agents.llm_provider import get_llm
 from app.models.tools import get_daily_summary, get_orders_by_status
 
 class OrderSummary(BaseModel):
@@ -14,16 +13,7 @@ class OrderSummary(BaseModel):
 
 async def run(business_id: str) -> dict[str, Any]:
     """Sipariş durumunu özetleyen LLM ajanı."""
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY tanımlı değil")
-
-    model = os.getenv("GOOGLE_MODEL", "gemini-2.5-flash")
-    llm = ChatGoogleGenerativeAI(
-        model=model,
-        google_api_key=api_key,
-        temperature=0.1,
-    )
+    llm = get_llm(temperature=0.1)
     
     tools = [get_daily_summary, get_orders_by_status]
     llm_with_tools = llm.bind_tools(tools)

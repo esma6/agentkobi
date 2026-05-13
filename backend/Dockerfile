@@ -1,4 +1,4 @@
-﻿FROM python:3.11-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -15,5 +15,9 @@ RUN pip install --upgrade pip && pip install -e .
 
 COPY . .
 
+# Entrypoint script'i çalıştırılabilir yap (Windows'ta git checkout yapan için)
+RUN chmod +x /app/entrypoint.sh
+
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default CMD: entrypoint (alembic + seed + uvicorn). compose dosyası da bu komutu kullanır.
+CMD ["/app/entrypoint.sh"]

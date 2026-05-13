@@ -264,10 +264,20 @@ class BriefingRequest(BaseModel):
     business_name: str = "Demo İşletme"
     owner_name: str = "Demo Sahibi"
     trigger_source: str = "manual"
+    send_channels: bool = False
 
 
 @router.post("/briefing/run")
 async def run_briefing(req: BriefingRequest):
+    import os
+    from app.validators.fallback import render_template_briefing
+
+    briefing_text = ""
+    used_fallback = False
+    errors: list[str] = []
+    channels = {"telegram": False, "email": False}
+
+    # 1) Brifing üret. Workflow tümüyle patlarsa deterministik fallback'e düş.
     try:
         from app.graph.orchestrator import run_workflow
         result = await run_workflow(
@@ -276,11 +286,49 @@ async def run_briefing(req: BriefingRequest):
             owner_name=req.owner_name,
             trigger_source=req.trigger_source,
         )
-        return {
-            "ok": True,
-            "briefing": result.get("briefing_final", ""),
-            "used_fallback": result.get("used_fallback", False),
-            "errors": result.get("errors", []),
-        }
+        briefing_text = (result.get("briefing_final") or "").strip()
+        used_fallback = bool(result.get("used_fallback", False))
+        errors.extend(result.get("errors", []))
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=str(exc))
+        errors.append(f"workflow_failed: {type(exc).__name__}: {exc}")
+
+    if not briefing_text:
+        used_fallback = True
+        try:
+            briefing_text = render_template_briefing(
+                order_data={}, stock_data=[], supplier_drafts=[]
+            )
+        except Exception:
+            briefing_text = (
+                "Günaydın! Sistem şu anda detaylı veri üretemedi, "
+                "manuel kontrol önerilir. İyi günler!"
+            )
+
+    # 2) Kanallardan gönder (LLM başarısız olsa bile fallback metni gider).
+    if req.send_channels:
+        from app.core.telegram import send_telegram_message
+        from app.core.email import send_email
+
+        try:
+            channels["telegram"] = await send_telegram_message(briefing_text)
+        except Exception as exc:
+            errors.append(f"telegram: {exc}")
+
+        target_email = os.getenv("BRIEFING_EMAIL")
+        if target_email:
+            try:
+                channels["email"] = await send_email(
+                    "Günlük Sabah Brifingi", briefing_text, target_email
+                )
+            except Exception as exc:
+                errors.append(f"email: {exc}")
+        else:
+            errors.append("email: BRIEFING_EMAIL tanımlı değil")
+
+    return {
+        "ok": True,
+        "briefing": briefing_text,
+        "used_fallback": used_fallback,
+        "errors": errors,
+        "channels": channels,
+    }

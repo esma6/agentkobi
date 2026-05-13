@@ -1,4 +1,4 @@
-﻿"""
+"""
 LangGraph node fonksiyonları.
 
 Her node:
@@ -40,8 +40,8 @@ async def order_node(state: AgentState) -> dict[str, Any]:
     try:
         from app.agents.order_agent import run as run_order_agent
         result = await run_order_agent(state["business_id"])
-    except (ImportError, AttributeError):
-        logger.warning("order_agent henüz hazır değil, stub döndürülüyor")
+    except Exception as exc:
+        logger.warning("order_agent başarısız, stub döndürülüyor: %s", exc)
         result = {
             "new_orders_yesterday": 0,
             "pending_to_prepare_today": 0,
@@ -57,8 +57,8 @@ async def stock_node(state: AgentState) -> dict[str, Any]:
     try:
         from app.agents.stock_agent import run as run_stock_agent
         result = await run_stock_agent(state["business_id"])
-    except (ImportError, AttributeError):
-        logger.warning("stock_agent henüz hazır değil, stub döndürülüyor")
+    except Exception as exc:
+        logger.warning("stock_agent başarısız, boş döndürülüyor: %s", exc)
         result = []
     return {
         "stock_data": result,
@@ -70,7 +70,8 @@ async def shipping_node(state: AgentState) -> dict[str, Any]:
     try:
         from app.agents.shipping_agent import run as run_shipping_agent
         result = await run_shipping_agent(state["business_id"])
-    except (ImportError, AttributeError):
+    except Exception as exc:
+        logger.warning("shipping_agent başarısız, stub döndürülüyor: %s", exc)
         result = {"to_ship": 0, "delayed": 0}
     return {
         "shipping_data": result,
@@ -82,7 +83,8 @@ async def supplier_node(state: AgentState) -> dict[str, Any]:
     try:
         from app.agents.supplier_agent import run as run_supplier_agent
         result = await run_supplier_agent(state["business_id"])
-    except (ImportError, AttributeError):
+    except Exception as exc:
+        logger.warning("supplier_agent başarısız, boş döndürülüyor: %s", exc)
         result = []
     return {
         "supplier_drafts": result,
@@ -96,14 +98,18 @@ async def supplier_node(state: AgentState) -> dict[str, Any]:
 
 async def rag_node(state: AgentState) -> dict[str, Any]:
     """Geçmiş benzer brifingleri vector store'dan çeker."""
-    from app.rag.retriever import retrieve_similar_briefings
+    try:
+        from app.rag.retriever import retrieve_similar_briefings
 
-    query = (
-        f"siparişler:{state.get('order_data', {}).get('new_orders_yesterday', 0)} "
-        f"stok_uyarisi:{len(state.get('stock_data', []))} "
-        f"taslak:{len(state.get('supplier_drafts', []))}"
-    )
-    docs = await retrieve_similar_briefings(query, k=3)
+        query = (
+            f"siparişler:{state.get('order_data', {}).get('new_orders_yesterday', 0)} "
+            f"stok_uyarisi:{len(state.get('stock_data', []))} "
+            f"taslak:{len(state.get('supplier_drafts', []))}"
+        )
+        docs = await retrieve_similar_briefings(query, k=3)
+    except Exception as exc:
+        logger.warning("RAG retrieval başarısız, boş context kullanılacak: %s", exc)
+        docs = []
     return {
         "rag_context": docs,
         "trace": [_trace("rag_node", retrieved=len(docs))],
@@ -150,7 +156,12 @@ async def briefing_llm_node(state: AgentState) -> dict[str, Any]:
             supplier_drafts=state.get("supplier_drafts", []),
             rag_context=state.get("rag_context", []),
         )
-    except (ImportError, AttributeError):
+    except Exception as exc:
+        # ImportError/AttributeError: ajan henüz hazır değil
+        # RuntimeError: GOOGLE_API_KEY yok
+        # ConnectionError / API error: LLM ulaşılamıyor veya rate limit
+        # Hepsi için aynı çözüm: deterministik template ile devam et.
+        logger.warning("briefing_agent çağrısı başarısız, fallback'e düşülüyor: %s", exc)
         from app.validators.fallback import render_template_briefing
         text = render_template_briefing(
             order_data=state.get("order_data", {}),
@@ -160,7 +171,8 @@ async def briefing_llm_node(state: AgentState) -> dict[str, Any]:
         return {
             "briefing_draft": text,
             "used_fallback": True,
-            "trace": [_trace("briefing_llm_node", path="template_fallback_no_agent")],
+            "errors": [f"briefing_agent_failed: {type(exc).__name__}: {exc}"],
+            "trace": [_trace("briefing_llm_node", path="template_fallback_llm_error")],
         }
 
     return {

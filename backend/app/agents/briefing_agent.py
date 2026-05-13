@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 from pathlib import Path
 from typing import Any
@@ -8,6 +9,8 @@ from typing import Any
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
 
 class BriefingOutput(BaseModel):
     briefing: str = Field(description="KOBİ sahibine yazılmış aksiyon odaklı Türkçe brifing metni.")
@@ -53,25 +56,73 @@ JSON veri:
 """.strip()
 
 
+def _build_groq_llm():
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        return None
+    try:
+        from langchain_groq import ChatGroq
+    except ImportError as exc:
+        logger.warning("langchain_groq import edilemedi: %s", exc)
+        return None
+    model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    return ChatGroq(model=model, api_key=api_key, temperature=0.2)
+
+
+def _build_gemini_llm():
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        return None
+    model = os.getenv("GOOGLE_MODEL", "gemini-2.5-flash")
+    return ChatGoogleGenerativeAI(
+        model=model,
+        google_api_key=api_key,
+        temperature=0.2,
+    )
+
+
+async def _invoke_llm(llm, prompt: str) -> str:
+    """Önce structured output dene; desteklemiyorsa düz metin parse et."""
+    try:
+        structured = llm.with_structured_output(BriefingOutput)
+        response = await structured.ainvoke(prompt)
+        return str(response.briefing).strip()
+    except Exception as exc:
+        logger.info("Structured output başarısız (%s), düz metin deneniyor.", exc)
+        response = await llm.ainvoke(prompt)
+        content = getattr(response, "content", response)
+        return str(content).strip()
+
+
 async def run(
     order_data: dict,
     stock_data: list[dict],
     supplier_drafts: list[dict],
     rag_context: list[str],
 ) -> str:
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY tanımlı değil")
-
-    model = os.getenv("GOOGLE_MODEL", "gemini-2.5-flash")
-    llm = ChatGoogleGenerativeAI(
-        model=model,
-        google_api_key=api_key,
-        temperature=0.2,
-    )
-    llm_structured = llm.with_structured_output(BriefingOutput)
-    
     payload = _compact_payload(order_data, stock_data, supplier_drafts, rag_context)
-    response = await llm_structured.ainvoke(_build_prompt(payload))
-    
-    return str(response.briefing).strip()
+    prompt = _build_prompt(payload)
+
+    # Sırayla dene: Groq (öncelikli) -> Gemini (yedek)
+    providers = [
+        ("groq", _build_groq_llm),
+        ("gemini", _build_gemini_llm),
+    ]
+
+    errors: list[str] = []
+    for name, builder in providers:
+        llm = builder()
+        if llm is None:
+            errors.append(f"{name}: api key/SDK yok")
+            continue
+        try:
+            text = await _invoke_llm(llm, prompt)
+            if text:
+                logger.info("Brifing %s sağlayıcısı ile üretildi.", name)
+                return text
+            errors.append(f"{name}: boş cevap")
+        except Exception as exc:
+            logger.warning("%s sağlayıcısı başarısız: %s", name, exc)
+            errors.append(f"{name}: {type(exc).__name__}: {exc}")
+
+    raise RuntimeError("Tüm LLM sağlayıcıları başarısız: " + " | ".join(errors))
