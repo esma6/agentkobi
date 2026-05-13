@@ -72,6 +72,57 @@ services:
     networks:
       - agentkobi-net
 
+  celery-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agentkobi-celery-worker
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://agentkobi:changeme@postgres:5432/agentkobi}
+      DATABASE_URL_SYNC: postgresql+psycopg2://${POSTGRES_USER:-agentkobi}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-agentkobi}
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      TZ: ${TZ:-Europe/Istanbul}
+    command: ["celery", "-A", "app.core.celery", "worker", "--loglevel=info"]
+    networks:
+      - agentkobi-net
+
+  celery-beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agentkobi-celery-beat
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+      celery-worker:
+        condition: service_started
+    env_file:
+      - .env
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      TZ: ${TZ:-Europe/Istanbul}
+    command: ["celery", "-A", "app.core.celery", "beat", "--loglevel=info"]
+    networks:
+      - agentkobi-net
+
   frontend:
     build:
       context: ./frontend
